@@ -1,6 +1,6 @@
 # Newzer-
 
-pay per request
+pay per request /n
 2 golang lambda functions
 postgresql db scalabke
 terraform script
