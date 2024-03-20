@@ -1,4 +1,4 @@
-# Newzer-
+# Newzer
 
 pay per request\
 2 golang lambda functions\
