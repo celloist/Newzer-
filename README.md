@@ -1,14 +1,14 @@
 # Newzer
 
 pay per request\
-2 golang lambda functions\
-postgresql db scalabke\
-terraform script\
-ci cd pipeline with github actions build and release\
-https(cert) and CORS\
+2 golang **AWS Lambda Function URLs**\ these are automatically configured to be https
+**postgresql** db scalabke\
+**terraform script** for the IAC\
+ci cd pipeline with **github actions** build and release\
+Not needed https(cert) , is CORS already set on functions?\
 secure the functions( cdn?)\
 fault tolerance\
-logger(cloudwatch)\
+logger(**cloudwatch**)\
 \
 \
 GET /news this returns a list of news items in JSON format\
