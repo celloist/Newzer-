@@ -2,10 +2,10 @@
 
 pay per request\
 2 golang **AWS Lambda Function URLs**\ these are automatically configured to be https
-**postgresql** db scalabke\
+**postgresql** db scalable\
 **terraform script** for the IAC\
 ci cd pipeline with **github actions** build and release\
-Not needed https(cert) , is CORS already set on functions?\
+Set CORS when setting up lamda\
 secure the functions( cdn?)\
 fault tolerance\
 logger(**cloudwatch**)\
