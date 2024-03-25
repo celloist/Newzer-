@@ -14,31 +14,24 @@ on:
 jobs:
  build:
   runs-on: ubuntu-latest
-  strategy: 
-    matrix:
-      go-version: [1.20]
   steps:
-   - name: check the code
-     uses: actions/Checkout@v3     
-   - name: test
-     run: echo "tested"
-   - name: setup go
-     uses: actions/setup-go@v4
-     with:
-       go-version: ${{ matrix.go-version }}
-     env:
-      GO111MODULE: "on"
-   - name: check setup
-     run: |     
-       go mod init backend-Go-Lambdas
-       go mod tidy      
-   - name: codebuld    
-     run: |
-      env GOOS=linux
-      ##-----Build Module 1---------##
-      go build  'backend/lambda/create-news-item/main.go'
-      go build  'backend/lambda/create-news-item/main.go'
-      
-      #--Zip the Build Files-----#
-      zip create-news-item.zip create-news-item
-      zip create-news-item.zip create-news-item
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.20'
+    - name: check setup
+      run: |     
+         go mod init backend-Go-Lambdas
+         go mod tidy      
+    - name: codebuld    
+      run: |
+        env GOOS=linux
+        ##-----Build Module 1---------##
+        go build  'backend/lambda/create-news-item/main.go'
+        go build  'backend/lambda/create-news-item/main.go'
+        
+        #--Zip the Build Files-----#
+        zip create-news-item.zip create-news-item
+        zip create-news-item.zip create-news-item
