@@ -1,4 +1,4 @@
-module create-news-items
+module create-news-item
 
 go 1.21.5
 
