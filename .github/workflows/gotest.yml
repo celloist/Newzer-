@@ -20,9 +20,20 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: '1.20'
-
-    - name: Build
-      run: go build -v ./...
+    - name: check setup
+      run: |     
+         go mod init backend-Go-Lambdas
+         go mod tidy      
+    - name: codebuld    
+      run: |
+        env GOOS=linux
+        ##-----Build Module 1---------##
+        go build  'backend/lambda/create-news-item/main.go'
+        go build  'backend/lambda/create-news-item/main.go'
+        
+        #--Zip the Build Files-----#
+        zip create-news-item.zip create-news-item
+        zip create-news-item.zip create-news-item
 
     - name: Test
       run: go test -v ./...
