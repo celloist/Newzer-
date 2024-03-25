@@ -2,9 +2,13 @@ name: Go builder
 
 on:
   push:
-    branches: [ "main" ]
-    paths:
-      - code/backend/lambda/**
+      branches: [ "main" ]
+      paths:
+        - code/backend/lambda/**
+  pull_request:
+      branches: [ "main" ]
+      paths:
+        - code/backend/lambda/**
 env:
   Deploy_Route_Url: ${{secrets.AWS_DEPLOY_DEV_ENV}}
 jobs:
