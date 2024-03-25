@@ -28,6 +28,7 @@ jobs:
       run: |
         env GOOS=linux
         ##-----Build Module 1---------##
+        echo {$PWD}
         go build  'backend/lambda/create-news-item/main.go'
         go build  'backend/lambda/create-news-item/main.go'
         
