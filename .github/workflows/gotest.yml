@@ -37,5 +37,6 @@ jobs:
         zip get-news-items.zip backend/lamdas/get-news-items/get-news-items
         zip create-news-item.zip backend/lamdas/create-news-item/create-news-item
 
+
     - name: Test
       run: go test -v ./...
