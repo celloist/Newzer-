@@ -4,9 +4,10 @@ terraform {
         source = "hashicorp/aws"    
       }  
     }  
-  backend "s3" {
-    region = "eu-central-1"   
-    key    = "terraform.tfstate"
+    backend "s3" {
+      bucket = "blog-cloudservices-terraform-state"
+      key    = "terraform.tfstate"
+      region = "eu-central-1"
   }
 }
 
