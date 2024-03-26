@@ -5,7 +5,6 @@ terraform {
       }  
     }  
     backend "s3" {
-      bucket = "blog-cloudservices-terraform-state"
       key    = "terraform.tfstate"
       region = "eu-central-1"
   }
