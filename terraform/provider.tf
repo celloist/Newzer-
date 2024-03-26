@@ -1,18 +1,18 @@
 terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = "~> 5.41.0"
-    }
-  }
-  backend "s3" {
+ required_providers {
+   aws = {
+     source = "hashicorp/aws"
+   }
+ }
+
+ backend "s3" {
    region = "eu-central-1"
    key    = "terraform.tfstate"
  }
 }
- 
+
 provider "aws" {
-  region = "eu-central-1"
+ region = "eu-central-1"
 }
 
 resource "aws_instance" "tf_instance" {
