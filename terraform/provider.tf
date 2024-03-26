@@ -1,10 +1,14 @@
 terraform {
-    backend "s3" {    
-          region = "eu-central-1"   
-          key    = "terraform.tfstate"  
-        } 
+    required_providers {    
+      aws = {      
+        source = "hashicorp/aws"    
+      }  
+    }  
+  backend "s3" {
+    region = "eu-central-1"   
+    key    = "terraform.tfstate"
+  }
 }
-
 
 provider "aws" {
  region = "eu-central-1"
