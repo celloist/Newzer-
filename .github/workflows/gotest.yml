@@ -34,7 +34,7 @@ jobs:
         cd backend/lamdas/create-news-item && go build -v .
         
         #--Zip the Build Files-----#
-        zip create-news-item.zip backend/lamdas/get-news-items/get-news-items
+        zip get-news-items.zip backend/lamdas/get-news-items/get-news-items
         zip create-news-item.zip backend/lamdas/create-news-item/create-news-item
 
     - name: Test
