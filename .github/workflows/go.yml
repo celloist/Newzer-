@@ -1,6 +1,6 @@
 name: Go builder
 
-on:
+#on:
   push:
       branches: [ "main" ]
       paths:
