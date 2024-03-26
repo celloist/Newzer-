@@ -30,9 +30,8 @@ jobs:
       run: |
         env GOOS=linux
         ##-----Build Module 1---------##
-        echo {$PWD}
-        go build -v './.../create-news-item/main.go'
-        go build -v './.../create-news-item/main.go'
+        cd ./backend/lamdas/create-news-items/main.go && go build -v .
+        cd ./backend/lamdas/create-news-item/ && go build -v  .
         
         #--Zip the Build Files-----#
         zip create-news-item.zip create-news-item
