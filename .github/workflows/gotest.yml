@@ -30,12 +30,12 @@ jobs:
       run: |
         env GOOS=linux
         ##-----Build Module 1---------##
-        cd ./backend/lamdas/create-news-items/main.go && go build -v .
-        cd ./backend/lamdas/create-news-item/ && go build -v  .
+        cd backend/lamdas/get-news-items && go build -v .
+        cd backend/lamdas/create-news-item && go build -v .
         
         #--Zip the Build Files-----#
-        zip create-news-item.zip create-news-item
-        zip create-news-item.zip create-news-item
+        zip create-news-item.zip backend/lamdas/get-news-itemsget-news-items
+        zip create-news-item.zip backend/lamdas/create-news-item/create-news-item
 
     - name: Test
       run: go test -v ./...
