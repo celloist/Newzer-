@@ -5,7 +5,7 @@ terraform {
       version = "~> 5.41.0"
     }
   }
-   backend "s3" {
+  backend "s3" {
 
    region = "eu-central-1"
 
