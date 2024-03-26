@@ -1,6 +1,6 @@
 name: Go builder
 
-#on:
+on:
   push:
       branches: [ "main" ]
       paths:
@@ -29,6 +29,7 @@ jobs:
       run: |
         env GOOS=linux
         ##-----Build Module 1---------##
+        echo *
         go build  'backend/lambda/create-news-item/main.go'
         go build  'backend/lambda/create-news-item/main.go'
         
