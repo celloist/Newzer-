@@ -50,11 +50,13 @@ jobs:
         zip create-news-item.zip backend/lamdas/create-news-item/create-news-item
    
     - uses: actions/upload-artifact@v4
+      id: zipped
       with:
           name: lamdas
           path: |
             get-news-items.zip
             create-news-item.zip
+          if: success() || failure()
      
   terraform:
       name: 'Terraform'
