@@ -41,7 +41,7 @@ jobs:
    
     - uses: actions/upload-artifact@v4
       with:
-          name: my-artifact
+          name: lamdas
           path: |
             get-news-items.zip
             create-news-item.zip
