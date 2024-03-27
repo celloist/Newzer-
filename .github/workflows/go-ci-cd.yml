@@ -38,4 +38,12 @@ jobs:
         #--Zip the Build Files-----#
         zip get-news-items.zip backend/lamdas/get-news-items/get-news-items
         zip create-news-item.zip backend/lamdas/create-news-item/create-news-item
+   
+    - uses: actions/upload-artifact@v4
+      with:
+          name: my-artifact
+          path: |
+            get-news-items.zip
+            create-news-item.zip
+          
 
