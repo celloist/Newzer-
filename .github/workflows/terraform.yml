@@ -35,7 +35,7 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
-
+    
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
@@ -55,8 +55,12 @@ jobs:
       run: terraform plan -input=false
       continue-on-error: true
 
-      # On push to "main", build or change infrastructure according to Terraform configuration files
-      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
+    - uses: actions/download-artifact@v4
+      with:
+        name: lamdas
+    - name: unzip artifact for deployment
+      run: unzip release.zip
+      
     - name: Terraform Apply
       #if: github.ref == 'refs/heads/"main"'
       run: terraform apply -auto-approve -input=false
