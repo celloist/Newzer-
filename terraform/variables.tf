@@ -15,7 +15,7 @@ variable "comment_prefix" {
 
 variable "function_zipfile" {
   description = "Path to a ZIP file that will be installed as the Lambda function (e.g. `\"my-api.zip\"`)"
-  default = "from cicd"
+  default = "fromcicd"
 }
 
 variable "function_s3_bucket" {
@@ -43,17 +43,17 @@ variable "function_runtime" {
   default     = "go1.x"
 }
 
-variable "function_env_vars" {
-  description = "Which env vars (if any) to invoke the Lambda with"
-  type        = map
+# variable "function_env_vars" {
+#   description = "Which env vars (if any) to invoke the Lambda with"
+#   type        = map
 
-  default = {
-    # This effectively useless, but an empty map can't be used in the "aws_lambda_function" resource
-    # -> this is 100% safe to override with your own env, should you need one
-    aws_lambda_api1 = "get-news-items"
-    aws_lambda_api2 = "create-news-item"
-  }
-}
+#   default = {
+#     # This effectively useless, but an empty map can't be used in the "aws_lambda_function" resource
+#     # -> this is 100% safe to override with your own env, should you need one
+#     aws_lambda_api1 = "get-news-items"
+#     aws_lambda_api2 = "create-news-item"
+#   }
+# }
 
 variable "stage_name" {
   description = "Name of the single stage created for the API on API Gateway" # we're not using the deployment features of API Gateway, so a single static stage is fine

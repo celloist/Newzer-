@@ -3,9 +3,10 @@
 # https://github.com/hashicorp/terraform/issues/16580#issuecomment-342573652
 
 locals {
-  function_id         = "${element(concat(aws_lambda_function.local_zipfile.*.id, list("")), 0)}${element(concat(aws_lambda_function.s3_zipfile.*.id, list("")), 0)}"
-  function_arn        = "${element(concat(aws_lambda_function.local_zipfile.*.arn, list("")), 0)}${element(concat(aws_lambda_function.s3_zipfile.*.arn, list("")), 0)}"
-  function_invoke_arn = "${element(concat(aws_lambda_function.local_zipfile.*.invoke_arn, list("")), 0)}${element(concat(aws_lambda_function.s3_zipfile.*.invoke_arn, list("")), 0)}"
+  # function_id         = "${element(concat(aws_lambda_function.local_zipfile.*.id, list("")), 0)}${element(concat(aws_lambda_function.s3_zipfile.*.id, list("")), 0)}"
+  # function_arn        = "${element(concat(aws_lambda_function.local_zipfile.*.arn, list("")), 0)}${element(concat(aws_lambda_function.s3_zipfile.*.arn, list("")), 0)}"
+  # function_invoke_arn = "${element(concat(aws_lambda_function.local_zipfile.*.invoke_arn, list("")), 0)}${element(concat(aws_lambda_function.s3_zipfile.*.invoke_arn, list("")), 0)}"
+  prefix_with_domain = "${var.name_prefix}-${var.api_domain}"
 }
 
 resource "aws_lambda_function" "main_lamda" {
@@ -23,9 +24,9 @@ resource "aws_lambda_function" "main_lamda" {
   role          = "${aws_iam_role.iam_for_main_lambda.arn}"
   tags          = "${var.tags}"
 
-  environment {
-    variables = "${var.function_env_vars}"
-  }
+  # environment {
+  #   variables = "${var.function_env_vars}"
+  # }
 }
 
 resource "aws_iam_role" "iam_for_main_lambda" {
