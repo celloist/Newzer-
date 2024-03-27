@@ -1,5 +1,6 @@
 variable "api_domain" {
   description = "Domain on which the Lambda will be made available (e.g. `\"api.example.com\"`)"
+  default="athmare"
 }
 
 variable "name_prefix" {
@@ -14,6 +15,7 @@ variable "comment_prefix" {
 
 variable "function_zipfile" {
   description = "Path to a ZIP file that will be installed as the Lambda function (e.g. `\"my-api.zip\"`)"
+  default = "from cicd"
 }
 
 variable "function_s3_bucket" {
@@ -95,10 +97,10 @@ variable "region" {
   description = "AWS region"
 }
 
-variable "db_password" {
-  description = "RDS root user password"
-  sensitive   = true
-}
+# variable "db_password" {
+#   description = "RDS root user password"
+#   sensitive   = true
+# }
 
 variable "db_username" {
     description = "RDS root user name"
