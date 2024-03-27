@@ -18,6 +18,6 @@ resource "aws_instance" "tf_instance" {
  ami           = "ami-830c94e3"
  instance_type = "t2.nano"
  tags = {
-   Name = "tf_instance"
+   belongsto = "tf_instance"
  }
 }
