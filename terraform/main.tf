@@ -87,16 +87,6 @@ resource "aws_lambda_function_url" "url1" {
 
 # }
 
-# provider "postgresql" {
-#   host            = aws_db_instance.postgres.address
-#   port            = local.postgres_port
-#   database        = local.postgres_database_name
-#   username        = local.postgres_username
-#   password        = local.postgres_password
-#   sslmode         = "require"
-#   connect_timeout = 15
-#   superuser       = false
-# }
 
 # // POSTGRES
 # resource "aws_security_group" "security_group_name" {
