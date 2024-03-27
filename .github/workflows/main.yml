@@ -1,0 +1,100 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Full go lamda ci cd pipeline with Terraform
+
+on:
+  #push:
+    #branches: [ "main" ]
+  #pull_request:
+    #branches: [ "main" ]
+  workflow_dispatch:
+env:
+    # verbosity setting for Terraform logs
+    TF_LOG: INFO
+    # Credentials for deployment to AWS
+    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    # S3 bucket for the Terraform state
+    BUCKET_TF_STATE: ${{ secrets.BUCKET_TF_STATE}}
+    
+permissions:
+    contents: read
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21.5'
+      env:
+        GO111MODULE: "on"
+    - name: check setup
+      run: |     
+         go mod init backend-Go-Lambdas
+         go mod tidy      
+    - name: codebuld    
+      run: |
+        env GOOS=linux
+        ##-----Build Module 1---------##
+        go build -C backend/lamdas/get-news-items -o get-news-items 
+        go build -C backend/lamdas/create-news-item -o create-news-item
+        
+        #--Zip the Build Files-----#
+        zip get-news-items.zip backend/lamdas/get-news-items/get-news-items
+        zip create-news-item.zip backend/lamdas/create-news-item/create-news-item
+   
+    - uses: actions/upload-artifact@v4
+      with:
+          name: lamdas
+          path: |
+            get-news-items.zip
+            create-news-item.zip
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: production
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./terraform
+
+    steps:
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
+    
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v3
+      with:
+            terraform_version: "1.7.5"
+
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform init -backend-config="bucket=$BUCKET_TF_STATE"
+
+    # Checks that all Terraform configuration files adhere to a canonical format
+    #- name: Terraform Format
+    #  run: terraform fmt -check
+
+    # Generates an execution plan for Terraform
+    - name: Terraform Plan
+      run: terraform plan -input=false
+      continue-on-error: true
+
+    - uses: actions/download-artifact@v4
+      with:
+        name: lamdas
+    - name: unzip lamdas
+      run: unzip lamdas.zip
+      
+    - name: Terraform Apply
+      #if: github.ref == 'refs/heads/"main"'
