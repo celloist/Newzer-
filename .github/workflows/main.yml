@@ -55,46 +55,47 @@ jobs:
           path: |
             get-news-items.zip
             create-news-item.zip
+     
   terraform:
-    name: 'Terraform'
-    runs-on: ubuntu-latest
-    environment: production
-
-    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
-    defaults:
-      run:
-        shell: bash
-        working-directory: ./terraform
-
-    steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
-    
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v3
-      with:
-            terraform_version: "1.7.5"
-
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init
-      run: terraform init -backend-config="bucket=$BUCKET_TF_STATE"
-
-    # Checks that all Terraform configuration files adhere to a canonical format
-    #- name: Terraform Format
-    #  run: terraform fmt -check
-
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      run: terraform plan -input=false
-      continue-on-error: true
-
-    - uses: actions/download-artifact@v4
-      with:
-        name: lamdas
-    - name: unzip lamdas
-      run: unzip lamdas.zip
+      name: 'Terraform'
+      runs-on: ubuntu-latest
+      environment: production
+  
+      # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+      defaults:
+        run:
+          shell: bash
+          working-directory: ./terraform
+  
+      steps:
+      # Checkout the repository to the GitHub Actions runner
+      - name: Checkout
+        uses: actions/checkout@v3
       
-    - name: Terraform Apply
-      #if: github.ref == 'refs/heads/"main"'
+      # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+              terraform_version: "1.7.5"
+  
+      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+      - name: Terraform Init
+        run: terraform init -backend-config="bucket=$BUCKET_TF_STATE"
+  
+      # Checks that all Terraform configuration files adhere to a canonical format
+      #- name: Terraform Format
+      #  run: terraform fmt -check
+  
+      # Generates an execution plan for Terraform
+      - name: Terraform Plan
+        run: terraform plan -input=false
+        continue-on-error: true
+  
+      - uses: actions/download-artifact@v4
+        with:
+          name: lamdas
+      - name: unzip lamdas
+        run: unzip lamdas.zip
+        
+      - name: Terraform Apply
+        #if: github.ref == 'refs/heads/"main"'
