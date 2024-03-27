@@ -15,12 +15,12 @@ variable "comment_prefix" {
 
 variable "function_zipfile" {
   description = "Path to a ZIP file that will be installed as the Lambda function (e.g. `\"my-api.zip\"`)"
-  default = "fromcicd"
+  default = "get-news-items.zip"
 }
 
-variable "function_s3_bucket" {
-  description = "When provided, the zipfile is retrieved from an S3 bucket by this name instead (filename is still provided via `function_zipfile`)"
-  default     = "get-news-items.zip"
+variable "function_zipfile2" {
+  description = "Path to a ZIP file that will be installed as the Lambda function (e.g. `\"my-api.zip\"`)"
+  default = "create-news-item.zip"
 }
 
 variable "function_handler" {
