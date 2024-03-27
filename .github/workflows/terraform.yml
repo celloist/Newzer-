@@ -58,8 +58,8 @@ jobs:
     - uses: actions/download-artifact@v4
       with:
         name: lamdas
-    - name: unzip artifact for deployment
-      run: unzip release.zip
+    - name: unzip lamdas
+      run: unzip lamdas.zip
       
     - name: Terraform Apply
       #if: github.ref == 'refs/heads/"main"'
