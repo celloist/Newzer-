@@ -6,7 +6,7 @@ locals {
 }
 
 resource "aws_lambda_function" "main_lamda" {
-  count = "${var.function_s3_bucket == "" ? 1 : 0}"
+  #count = "${var.function_s3_bucket == "" ? 1 : 0}"
 
   filename         = "${var.function_zipfile}"
   source_code_hash = "${var.function_s3_bucket == "" ? "${base64sha256(file("${var.function_zipfile}"))}" : ""}"
