@@ -111,8 +111,3 @@ variable "db_instance" {
   description = "RDS DB instance type"
   default     = "db.t4g.micro"
 }
-
-
-locals {
-  prefix_with_domain = "${var.name_prefix}${replace("${var.api_domain}", "/[^a-z0-9-]+/", "-")}" # only lowercase alphanumeric characters and hyphens are allowed in e.g. S3 bucket names
-}
