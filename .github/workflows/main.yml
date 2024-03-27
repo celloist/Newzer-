@@ -60,6 +60,8 @@ jobs:
      
   terraform:
       name: 'Terraform'
+      if: ${{ always() && contains(join(needs.*.result, ','), 'success') }}
+      needs: [build]
       runs-on: ubuntu-latest
       environment: production
   
