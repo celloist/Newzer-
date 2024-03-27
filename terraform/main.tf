@@ -29,7 +29,7 @@ resource "aws_lambda_function" "main_lamda" {
 }
 
 resource "aws_iam_role" "iam_for_main_lambda" {
-  name = "example-role"
+  name = "lamda-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
@@ -43,7 +43,7 @@ resource "aws_iam_role" "iam_for_main_lambda" {
 }
 
 resource "aws_iam_policy" "policy_for_main_lambda" {
-  name        = "example-policy"
+  name        = "lamda-policy"
   policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{

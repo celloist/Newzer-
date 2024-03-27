@@ -18,7 +18,7 @@ variable "function_zipfile" {
 
 variable "function_s3_bucket" {
   description = "When provided, the zipfile is retrieved from an S3 bucket by this name instead (filename is still provided via `function_zipfile`)"
-  default     = ""
+  default     = "get-news-items.zip"
 }
 
 variable "function_handler" {
