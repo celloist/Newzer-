@@ -15,12 +15,12 @@ variable "comment_prefix" {
 
 variable "function_zipfile" {
   description = "Path to a ZIP file that will be installed as the Lambda function (e.g. `\"my-api.zip\"`)"
-  default = "../lamdas/get-news-items.zip"
+  default = "../get-news-items.zip"
 }
 
 variable "function_zipfile2" {
   description = "Path to a ZIP file that will be installed as the Lambda function (e.g. `\"my-api.zip\"`)"
-  default = "../lamdas/create-news-item.zip"
+  default = "../create-news-item.zip"
 }
 
 variable "function_handler" {
