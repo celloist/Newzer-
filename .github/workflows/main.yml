@@ -101,7 +101,8 @@ jobs:
           name: lamdas
       - run: |
           echo "echo starts here"
-          echo *
+          echo * 
+          echo ../*
           echo ${{ github.workspace }}
           echo $GITHUB_WORKSPACE
         
