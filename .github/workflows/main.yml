@@ -75,11 +75,7 @@ jobs:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
         uses: actions/checkout@v3
-      - run: |
-          echo "echo starts here"
-          echo *
-          echo ${{ github.workspace }}
-          echo $GITHUB_WORKSPACE
+
       
       # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
       - name: Setup Terraform
@@ -103,6 +99,11 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: lamdas
+      - run: |
+          echo "echo starts here"
+          echo *
+          echo ${{ github.workspace }}
+          echo $GITHUB_WORKSPACE
         
       - name: Terraform Apply
         #if: github.ref == 'refs/heads/"main"'
